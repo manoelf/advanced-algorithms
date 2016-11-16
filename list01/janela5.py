@@ -13,7 +13,7 @@ result = 0
 if (f2 < (f1 + 200)):
     result = (f1 +200) - f2
 if (f3 < (f2 + 200)):
-    result = (f2 + 200) - f3
+    result += (f2 + 200) - f3
 
 if (f1 == f2 or f1 == f3 or f2 == f3):
     result += 200
