@@ -19,11 +19,10 @@ else:
 	if(inp[0] + 200 < inp[1] and inp[1] + 200 > inp[2]):
 		inter = abs(inp[1] + 200 - inp[2])
 	if(inp[0] + 200 > inp[1] and inp[1] + 200 > inp[2] and inp[0] + 200 < inp[2]):
-		inter1 = abs(inp[0] + 200 - inp[1])
-		inter2 = abs(inp[1] + 200 - inp[2])
-		inter = inter1 + inter2
+		inter = abs(inp[0] - inp[2] + 200)
 	if(inp[0] + 200 == inp[1] and inp[1] + 200 > inp[2]):
 		inter = abs(inp[1] + 200 - inp[2])
+		print inter
 		inter = 600 - (2*( 200 - inter) + inter +200 )
 	if(inp[0] + 200 > inp[1] and inp[1] + 200 == inp[2]):
 		inter = abs(inp[0] + 200 - inp[2])

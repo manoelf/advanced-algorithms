@@ -9,7 +9,7 @@ for ((i = 0; i <= 400; i++)); do
     out1=$(python gerson.py < file)
     out2=$(python ionesio.py < file)
     if [ $out1 != $out2 ]; then
-        echo "Saida gerson  = $out1 | Saida ionesio = $out2"
+        echo "Saida esperada  = $out1 | Saida ionesio = $out2"
         cat file 
     fi
 
