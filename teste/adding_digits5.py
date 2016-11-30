@@ -3,25 +3,24 @@
 a, b, n = map(int, raw_input().split())
 
 def make_divisible(num):
-    
-    new_num = str(num) + '1'
-    i = 2
+    i = 0 
+    new_num = num + str(i)
     while (i <= 9 and int(new_num) % b != 0):
-        new_num = num + str(i)
         i += 1
-        
+        new_num = num + str(i)
+
     if (int(new_num) % b == 0):
         return new_num
     else:
         return num
 
-result = make_divisible(str(a))
-
-for i in xrange(n - 1):
+result = str(a) 
+i = 0
+while (i < n and result == str(a)):
     result = make_divisible(result)
+    i += 1
 
-
-if (int(result) % 2 == 0):
-    print result
+if (int(result) % b == 0):
+    print result + ((n - i) * '0')
 else:
     print -1
