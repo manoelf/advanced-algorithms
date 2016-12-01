@@ -6,7 +6,7 @@ def gcd(a, b):
 
 def find_num(a, b):
     num = 2
-    while(gcd(a, num) != 1 and gcd(b, num) != 1):
+    while(gcd(a, num) != 1 or  gcd(b, num) != 1):
         num += 1
     return num
 
@@ -20,12 +20,12 @@ cont = 1
 
 
 for i in xrange(n - 1):
-    new_array += " " + str(array[i])
     if (gcd(array[i], array[i + 1]) != 1):
         new_array += " " + str(find_num(array[i], array[i + 1]))
-        cont += 1
+        cont += i
+    else:
+        new_array += " " + str(array[i + 1])
 
-new_array += " " + str(array[n-1])
 print cont
 print new_array
 
