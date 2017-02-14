@@ -16,13 +16,14 @@ array =  map(int, raw_input().split())
 
 new_array = str(array[0])
 
-cont = 1
+cont = 0
 
 
 for i in xrange(n - 1):
     if (gcd(array[i], array[i + 1]) != 1):
         new_array += " " + str(find_num(array[i], array[i + 1]))
-        cont += i
+        cont += 1
+        new_array += " " + str(array[i + 1])
     else:
         new_array += " " + str(array[i + 1])
 
