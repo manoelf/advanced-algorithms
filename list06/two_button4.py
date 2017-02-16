@@ -2,14 +2,32 @@
 
 a, b = map(int, raw_input().split())
 
-def get_num(a, b):
-    cont = 0
+def find_num(a, b):
+    result = 0
+    if (a > b):
+        result = a - b
+    elif (b % 2 == 0):  
+        while (a != b):
+            if (a * 2 > b):
+                result += 1
+                a -= 1
+            else:
+                a = a*2
+                result += 1
+    else:
+        while (a != b):
+            if (a - 1 == b):
+                result += 1
+                break
+            elif (a > b):
+                result += a - b
+                a = a - b
+                break
+            else:
+                a = a * 2
+                result += 1            
+    return result
 
-    while(a > 0):
-        if (a == b):
-            break
-        elif (a < b):
-    cont += 1
-    return cont           
+print find_num(a,b)
 
-print get_num(a, b)
+
