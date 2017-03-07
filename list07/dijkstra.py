@@ -1,6 +1,7 @@
 #http://codeforces.com/problemset/problem/20/C
 
 vertices, edges = map(int, raw_input().split())
+vertices  += 1
 
 dad = vertices * [None]
 distance = vertices * [float("+infinity")]
@@ -12,6 +13,7 @@ Q = [] #vertices | provisore distances
 w = {} 
 V = set()
 
+way = []
 
 def populate(v1, v2):
     if (v1 in adj):
@@ -35,7 +37,6 @@ for i in xrange(edges):
     w[(v1, v2)] = weight
     V.add(v1)
     V.add(v2)
-print adj, "adj"
 #w = {} will be the graph (1, 2): 9
 
 for i in V:
@@ -51,7 +52,7 @@ def extract_min(Q):
     return Q.pop(mini)
 
 def dijkstra(V, start):
-    dad[start] = 0
+    distance[start] = 0
    # Q = V
     S = []
 
@@ -59,16 +60,20 @@ def dijkstra(V, start):
         u = extract_min(Q)
         S.append(u)
         for v in adj[u]:
-            print dad
-            print Q
-            print S
-            print distance
+            print "dad:", dad
+            print "distance:", distance
+            print "Q:", Q
+            print "S:", S
+            print "u:", u
+            print ""
 
 
             if ((u,v) in w and distance[v] > (distance[u] + w[(u,v)])):
                 distance[v] = distance[u] + w[(u,v)]
                 dad[v] = u
+                way.append(v)
 print dad
 dijkstra(V, 1)
+print "way:", way
 
 
