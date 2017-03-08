@@ -1,79 +1,71 @@
-#http://codeforces.com/problemset/problem/20/C
+V, E = map(int, raw_input().split())
+V += 1
 
-vertices, edges = map(int, raw_input().split())
-vertices  += 1
+Q = set() # all vertices
+S = [] #auxiliary to put teh vertices removes from Q
+adj = {} # adjacence list for each vertices
 
-dad = vertices * [None]
-distance = vertices * [float("+infinity")]
-adj = {}
+prev = V * [None]
+dist = V * [float("+infinity")]
+w = {} #Graph maping vertice: weight
+def populate_w(v1, v2, weight):
+    edge =  (v1, v2)
+    w[edge] = weight
 
-S = [] #definitive distance
-Q = [] #vertices | provisore distances
-
-w = {} 
-V = set()
-
-way = []
-
-def populate(v1, v2):
+def populate_adj(v1, v2):
     if (v1 in adj):
         adj[v1].add(v2)
     else:
         adj[v1] = set()
-        adj[v1].add(v2)
-
+        adj[v1].add(v2)   
     if (v2 in adj):
         adj[v2].add(v1)
     else:
-        adj[v2] = set() 
+        adj[v2] = set()
         adj[v2].add(v1)
+ 
 
-
-
-
-for i in xrange(edges):
+for i in xrange(E):
     v1, v2, weight = map(int, raw_input().split())
-    populate(v1, v2)
-    w[(v1, v2)] = weight
-    V.add(v1)
-    V.add(v2)
-#w = {} will be the graph (1, 2): 9
+    populate_w(v1, v2, weight)
+    populate_adj(v1, v2)
+    Q.add(v1)
+    Q.add(v2)
 
-for i in V:
-    Q.append(i)
 
 def extract_min(Q):
     mini = None
-    for i in xrange(len(Q)):
-        if (mini == None):
-            mini = i
-        elif (Q[i] < Q[mini]):
-            mini = i
-    return Q.pop(mini)
+    vertice = None
+    for v in Q:
+        if (mini == None): 
+            mini = dist[v]
+            vertice = v
+        elif (dist[v] < mini):
+            mini = dist[v]
+            vertice = v
+    Q.remove(vertice)
+    return vertice
 
-def dijkstra(V, start):
-    distance[start] = 0
-   # Q = V
-    S = []
+dist[1] = 0
+while (len(Q) > 0):
+    print "Distances", dist
+    print "Previous", prev
+    print "Q", Q
+    print "S", S
 
-    while (len(Q) > 0):
-        u = extract_min(Q)
-        S.append(u)
-        for v in adj[u]:
-            print "dad:", dad
-            print "distance:", distance
-            print "Q:", Q
-            print "S:", S
-            print "u:", u
-            print ""
-
-
-            if ((u,v) in w and distance[v] > (distance[u] + w[(u,v)])):
-                distance[v] = distance[u] + w[(u,v)]
-                dad[v] = u
-                way.append(v)
-print dad
-dijkstra(V, 1)
-print "way:", way
-
-
+    u = extract_min(Q)
+    S.append(u)
+    print "u", u
+    if (u == V): break
+    
+    for v in adj[u]:
+        print (u, v) in w
+        if ((u, v) in w and dist[v] > dist[u] + w[(u, v)]):
+            dist[v] = dist[u] + w[(u, v)]
+            prev[v] = u
+print "Distances", dist
+print "Previous", prev
+print "Q", Q
+print "S", S
+print "Adjacences", adj
+print "Graph w", w
