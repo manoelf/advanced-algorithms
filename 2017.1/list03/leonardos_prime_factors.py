@@ -1,35 +1,47 @@
 #https://www.hackerrank.com/contests/basico-2017-1-lista-3/challenges/leonardo-and-prime
-def is_prime(i):
-    if (i == 1 or i == 3 or
-         i == 5 or i == 7):
+def is_prime(n):
+    if (n == 2 or n == 3):
         return True
-    #multiples of 2
-    elif (i % 2 == 0):
+    if (n <= 1 or n%2 == 0):
         return False
-    #divisible by 3
-    elif (i % 3 == 0):
-        return False
-    #divisible by 5
-    elif (i != 5 and i % 5 == 0):
-        return False
-    #divisible by 7
-    elif (i != 7 and i % 7 == 0):
-        return False
-    else:
-        return True
- 
-def print_primes(end):
+    i = 3
+    while (i*i <= n):
+        if (n % i == 0):
+            return False
+        i += 2
+    return True
+
+
+
+def next_prime(num):
+    new_num = num + 1
+    while (not(is_prime(new_num))):
+        new_num += 1
+    return new_num
+
+def find_divisors(value):
+    primes = set()
+    num = next_prime(1)
+    total = 1 
     cont = 0
-    for i in xrange(0, end + 1):
-        if (is_prime(i)):
-            cont += 1
-            print i
-    
+    while (total <= value):
+        total *= num
+        num = next_prime(num)
+        cont += 1
+    return cont
+
+
+
+
+
+
+
 
 n = int(raw_input())
 for i in xrange(n):
     value = int(raw_input())
-    print_primes(value)
+    print find_divisors(value) - 1
+
     
     
 
