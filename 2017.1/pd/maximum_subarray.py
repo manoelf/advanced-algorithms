@@ -7,22 +7,19 @@ def max_sub(array, n):
     max_here = maxi
     first = 0
     second = 0
-    started = False
+    index = []
     for i in range(n):
         if (array[i] + max_here > 0):     
             max_here += array[i]
-            if (not(started) and first == 0):
-                first = i
-                started = True
+            if (len(index) == 0):
+                index.append(i)
         else:
             max_here = 0
-            started = False
+            index = []
         if (max_here > maxi):
             maxi = max_here
-            last = i
-    print maxi
-    print first, second
-    return first, second
+            index.append(i)
+    return index
 
 def format(array):
     for i in array:
@@ -34,4 +31,3 @@ for i in range(t):
     array = map(int, raw_input().split())
     x, y = max_sub(array, size)
     format(array[x:y+1])
-    print "ended"
